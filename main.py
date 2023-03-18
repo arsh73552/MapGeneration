@@ -8,12 +8,12 @@ def main():
     recon_criterion = nn.L1Loss() 
     lambda_recon = 200
 
-    n_epochs = 20
+    n_epochs = 160
     input_dim = 3
     real_dim = 3
     display_step = 100
     batch_size = 1
-    lr = 0.0002
+    lr = 0.0003
     target_shape = 256
     device = 'cuda'
     save_model = True
@@ -30,7 +30,7 @@ def main():
 
     pretrained = False
     if pretrained:
-        loaded_state = torch.load("myModel.pth")
+        loaded_state = torch.load("pix2pix_100.pth")
         gen.load_state_dict(loaded_state["gen"])
         gen_opt.load_state_dict(loaded_state["gen_opt"])
         disc.load_state_dict(loaded_state["disc"])
@@ -51,7 +51,6 @@ def main():
             condition = nn.functional.interpolate(condition, size=target_shape)
             real = image[:, :, :, image_width // 2:]
             real = nn.functional.interpolate(real, size=target_shape)
-            cur_batch_size = len(condition)
             condition = condition.to(device)
             real = real.to(device)
 
@@ -77,14 +76,12 @@ def main():
             if cur_step % display_step == 0:
                 if cur_step > 0:
                     print(f"Epoch {epoch}: Step {cur_step}: Generator (U-Net) loss: {mean_generator_loss}, Discriminator loss: {mean_discriminator_loss}")
-                else:
-                    print("Pretrained initial state")
-                a = show_tensor_images(condition, size=(input_dim, target_shape, target_shape))
-                b = show_tensor_images(real, size=(real_dim, target_shape, target_shape))
-                c = show_tensor_images(fake, size=(real_dim, target_shape, target_shape))
-                d = torch.cat([a,b,c], axis = 1)
-                # plt.imshow(d)
-                # plt.show()
+                #a = show_tensor_images(condition, size=(input_dim, target_shape, target_shape))
+                #b = show_tensor_images(real, size=(real_dim, target_shape, target_shape))
+                #c = show_tensor_images(fake, size=(real_dim, target_shape, target_shape))
+                #d = torch.cat([a,b,c], axis = 1)
+                #plt.imshow(d)
+                #plt.show()
                 mean_generator_loss = 0
                 mean_discriminator_loss = 0
                 if save_model:
@@ -94,7 +91,6 @@ def main():
                         'disc_opt': disc_opt.state_dict()
                     }, f"pix2pix_{cur_step}.pth")
             cur_step += 1
-
 
 if __name__ == '__main__':
     main()
