@@ -28,21 +28,11 @@ def main():
     disc = Discriminator(input_dim + real_dim).to(device)
     disc_opt = torch.optim.Adam(disc.parameters(), lr=lr)
 
-    pretrained = False
-    if pretrained:
-        loaded_state = torch.load("pix2pix_100.pth")
-        gen.load_state_dict(loaded_state["gen"])
-        gen_opt.load_state_dict(loaded_state["gen_opt"])
-        disc.load_state_dict(loaded_state["disc"])
-        disc_opt.load_state_dict(loaded_state["disc_opt"])
-    else:
-        gen = gen.apply(weights_init)
-        disc = disc.apply(weights_init)
-
     mean_generator_loss = 0
+    counter = 0
     mean_discriminator_loss = 0
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    cur_step = 0
+    cur_step = 1000
 
     for epoch in range(n_epochs):
         for image, _ in tqdm(dataloader):
@@ -85,11 +75,14 @@ def main():
                 mean_generator_loss = 0
                 mean_discriminator_loss = 0
                 if save_model:
+                    if counter > 5:
+                        counter = 0
+                    counter += 1
                     torch.save({'gen': gen.state_dict(),
                         'gen_opt': gen_opt.state_dict(),
                         'disc': disc.state_dict(),
                         'disc_opt': disc_opt.state_dict()
-                    }, f"pix2pix_{cur_step}.pth")
+                    }, f"myModel{counter}.pth")
             cur_step += 1
 
 if __name__ == '__main__':
