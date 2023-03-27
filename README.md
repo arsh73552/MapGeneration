@@ -9,7 +9,19 @@ The project utilizes Generative Adversarial Networks and the U-Net network archi
     4. torchvision = v0.12.0+cu113
     5. PIL = v9.1.1
 
+### Example
 
 Prediction               || Satellite Image                || Real Output
 
 ![Can't Load Image](https://github.com/arsh73552/MapGeneration/blob/main/exampleOut.jpg)
+
+
+## Citation
+
+If you find this project useful, please cite as the inspiration for the project has been taken from the paper mentioned below:
+
+> Olaf Ronneberger 
+> Philipp Fischer 
+> Thomas Brox
+> U-Net: Convolutional Networks for Biomedical Image Segmentation
+> https://doi.org/10.48550/arXiv.1505.04597
