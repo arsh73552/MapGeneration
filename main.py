@@ -4,8 +4,8 @@ from discriminator import Discriminator
 from getLoss import get_gen_loss
 
 def main():
-    adv_criterion = nn.BCEWithLogitsLoss() 
-    recon_criterion = nn.L1Loss() 
+    adv_criterion = nn.BCEWithLogitsLoss() # Binary Cross Entroy Loss.
+    recon_criterion = nn.L1Loss() # L1 Loss = MAE in Reconstruction
     lambda_recon = 200
 
     n_epochs = 160
@@ -19,20 +19,22 @@ def main():
     save_model = True
 
     transform = transforms.Compose([
-        transforms.ToTensor(),
+        transforms.ToTensor(),         # jpg to Tensor Converter.
     ])
-    dataset = torchvision.datasets.ImageFolder("maps", transform=transform)
+    dataset = torchvision.datasets.ImageFolder("maps", transform=transform) # Prepares Dataset to be loaded in the form of Pytorch Tensors.
 
-    gen = UNet(input_dim, real_dim).to(device)
-    gen_opt = torch.optim.Adam(gen.parameters(), lr=lr)
-    disc = Discriminator(input_dim + real_dim).to(device)
-    disc_opt = torch.optim.Adam(disc.parameters(), lr=lr)
+    gen = UNet(input_dim, real_dim).to(device) # Creating instance of generator and moving to device (CUDA is faster).
+    gen_opt = torch.optim.Adam(gen.parameters(), lr=lr) # Using ADAM to optimize generator.
+    disc = Discriminator(input_dim + real_dim).to(device) # Create instance of Discriminator and move to device (CUDA is faster).
+    disc_opt = torch.optim.Adam(disc.parameters(), lr=lr) # Using ADAM to optimize discriminator.
+    gen.apply(weights_init) # Initialize Weights
+    disc.apply(weights_init) # Initialize Weights
 
     mean_generator_loss = 0
     counter = 0
     mean_discriminator_loss = 0
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    cur_step = 1000
+    cur_step = 0
 
     for epoch in range(n_epochs):
         for image, _ in tqdm(dataloader):

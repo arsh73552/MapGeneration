@@ -8,6 +8,26 @@ class UNet(nn.Module):
 
     def __init__(self, input_channels, output_channels, hidden_channels=32):
         super(UNet, self).__init__()
+        if (not isinstance(input_channels, int)) and (not isinstance(output_channels, int)) and (not isinstance(hidden_channels, int)):
+            raise ValueError(
+                'Expected Integer Values for input_channels, output_channels and hidden_channels, '
+                f'got {input_channels} {output_channels} {hidden_channels}.'
+            )
+        if input_channels <= 0:
+            raise ValueError(
+                'Expected positive Input Channels, '
+                f'got {input_channels}.'
+            )
+        elif output_channels <= 0:
+            raise ValueError(
+                'Expected positive Output Channels, '
+                f'got {output_channels}.'
+            )
+        elif hidden_channels <= 0:
+            raise ValueError(
+                'Expected positive Hidden Channels, '
+                f'got {hidden_channels}.'
+            )
         self.upfeature = FeatureMapBlock(input_channels, hidden_channels)
         self.contract1 = ContractingBlock(hidden_channels, use_dropout=True)
         self.contract2 = ContractingBlock(hidden_channels * 2, use_dropout=True)

@@ -5,6 +5,16 @@ from helper import crop
 class ExpandingBlock(nn.Module):
     def __init__(self, num_input_channels, use_dropout = False, use_batch_norm = True):
         super(ExpandingBlock, self).__init__()
+        if num_input_channels <= 0:
+            raise ValueError(
+                'Expected positive Input Channels, '
+                f'got {num_input_channels}.'
+            )
+        elif (not isinstance(num_input_channels, int)):
+            raise ValueError(
+                'Expected Integer Values for input_channels, '
+                f'got {num_input_channels}.'
+            )
         self.upsample = nn.Upsample(scale_factor= 2, mode = "nearest")
         self.firstConvLayer = nn.Conv2d(num_input_channels, num_input_channels // 2, kernel_size=2)
         self.secondConvLayer = nn.Conv2d(num_input_channels, num_input_channels // 2, kernel_size=3, padding=1)
