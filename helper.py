@@ -1,6 +1,5 @@
 from dependencies import *
-import numpy as np
-import PIL
+
 def crop(image, new_shape):
     '''
     Input Params:
@@ -86,7 +85,7 @@ def show_tensor_images(image_tensor, num_images=25, size=(1, 28, 28)):
     return image_grid.permute(1, 2, 0).squeeze()
 
 def weights_init(m):
-    
+
     if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d):
         torch.nn.init.normal_(m.weight, 0.0, 0.02)
     if isinstance(m, nn.BatchNorm2d):
