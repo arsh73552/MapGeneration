@@ -25,3 +25,9 @@ If you find this project useful, please cite as the inspiration for the project 
 > Thomas Brox
 > U-Net: Convolutional Networks for Biomedical Image Segmentation
 > https://doi.org/10.48550/arXiv.1505.04597
+
+### License
+
+<a href = 'MIT-LICENSE.txt'>License</a>
+
+
