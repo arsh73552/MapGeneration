@@ -5,7 +5,7 @@ from helper import crop
 class ExpandingBlock(nn.Module):
     def __init__(self, num_input_channels, use_dropout = False, use_batch_norm = True):
         super(ExpandingBlock, self).__init__()
-        self.upsample = nn.Upsample(scale_factor= 2, mode = "bilinear", align_corners=True)
+        self.upsample = nn.Upsample(scale_factor= 2, mode = "nearest")
         self.firstConvLayer = nn.Conv2d(num_input_channels, num_input_channels // 2, kernel_size=2)
         self.secondConvLayer = nn.Conv2d(num_input_channels, num_input_channels // 2, kernel_size=3, padding=1)
         self.thirdConvLayer = nn.Conv2d(num_input_channels // 2, num_input_channels // 2, kernel_size=2, padding=1)

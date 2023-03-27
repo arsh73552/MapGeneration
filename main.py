@@ -82,7 +82,7 @@ def main():
                         'gen_opt': gen_opt.state_dict(),
                         'disc': disc.state_dict(),
                         'disc_opt': disc_opt.state_dict()
-                    }, f"myModel{counter}.pth")
+                    }, f"test{counter}.pth")
             cur_step += 1
 
 if __name__ == '__main__':
