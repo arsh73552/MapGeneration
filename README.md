@@ -23,8 +23,6 @@ To run the RoadMapGAN project, ensure you have the following dependencies instal
 - NumPy
 - pytest (for running unit tests)
 
-## Usage
-1. **Clone the Repository**:
 
 
 The project utilizes Generative Adversarial Networks and the U-Net network architecture in order to convert satellite images to Road Views. This project has a variety of use cases as it is dynamic in nature. That is, environmental changes can be detected using this model. For instance the model can be used for Flood detection, Vegetation cover check, etc.
