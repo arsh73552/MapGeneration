@@ -32,7 +32,7 @@ To run the RoadMapGAN project, ensure you have the following dependencies instal
 
 ### Example
 
-Predicted Imagne               || Satellite Image                || Real Output
+Predicted Image               || Satellite Image                || Real Output
 
 ![Can't Load Image](https://github.com/arsh73552/MapGeneration/blob/main/exampleOut.jpg)
 
