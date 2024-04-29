@@ -23,17 +23,6 @@ To run the RoadMapGAN project, ensure you have the following dependencies instal
 - NumPy
 - pytest (for running unit tests)
 
-## Usage
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yourusername/RoadMapGAN.git
-
-
-
-2. **Install Dependencies**:
-
-The project utilizes Generative Adversarial Networks and the U-Net network architecture in order to convert satellite images to Road Views. This project has a variety of use cases as it is dynamic in nature. That is, environmental changes can be detected using this model. For instance the model can be used for Flood detection, Vegetation cover check, etc.
-
 ### Required Modules
     1. Pytorch = v1.11.0+cu113
     2. Matplotlib = v3.5.2
@@ -43,7 +32,7 @@ The project utilizes Generative Adversarial Networks and the U-Net network archi
 
 ### Example
 
-Prediction               || Satellite Image                || Real Output
+Predicted Imagne               || Satellite Image                || Real Output
 
 ![Can't Load Image](https://github.com/arsh73552/MapGeneration/blob/main/exampleOut.jpg)
 
